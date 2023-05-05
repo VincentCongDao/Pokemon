@@ -1,1 +1,5 @@
-# Pokemon Application create by React.js with Graphql API
+
+
+
+
+### Credit to (Code Dealer)[https://www.youtube.com/@TheCodeDealer] and (PokeAPI)[https://pokeapi.co/]
