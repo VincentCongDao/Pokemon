@@ -9,7 +9,15 @@ function Modal(props) {
   const { showModal, setShowModal } = props;
   const router = useRouter();
   const { pokemon } = router.query;
-  const { getPokemon, loading, pokemon: pokemonItem } = useGlobalContext();
+  const {
+    getPokemon,
+    loading,
+    pokemon: pokemonItem,
+    allPokemonData,
+    searchResults,
+    next: fetchNext,
+    realTimeSearch,
+  } = useGlobalContext();
 
   useEffect(() => {
     if (pokemon) {
@@ -26,6 +34,22 @@ function Modal(props) {
 
   return (
     <>
+      <form action="" className="search-form" onSubmit={handleSearch}>
+        <div className="input-control">
+          <input
+            type="text"
+            value={search}
+            onChange={handleChange}
+            placeholder="Search For Pokemon ..."
+          />
+          <button className="submit-btn" type="submit">
+            Search
+          </button>
+        </div>
+      </form>
+      {search && searchResults.length > 0 && (
+        <div className="search-results">{displaySearchResults()}</div>
+      )}
       <div className={modalstyle.modal}>
         {!loading ? (
           pokemonItem && (
@@ -61,8 +85,8 @@ function Modal(props) {
                 <h2>{pokemonItem?.name}</h2>
                 <div className={styles.PokemonInfo}>
                   <div className={styles.PokemonInfoItem}>
-                    <h5>Name:</h5>
                     <p>{pokemonItem?.name}</p>
+                    <h5>Name:</h5>
                   </div>
 
                   <div className={styles.PokemonInfoItem}>
